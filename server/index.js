@@ -11,6 +11,25 @@ app.get("/api/health", (req, res) => {
     openai: !!process.env.OPENAI_API_KEY
   });
 });
+app.get("/api/test-openai", async (req, res) => {
+  try {
+    const response = await fetch("https://api.openai.com/v1/models", {
+      headers: {
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      },
+    });
+
+    const data = await response.json();
+
+    res.status(response.status).json({
+      status: response.status,
+      ok: response.ok,
+      data
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 app.post("/api/ai", async (req, res) => {
   try {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
