@@ -36,7 +36,3 @@ const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log("Servidor corriendo en puerto " + PORT);
 });
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log("Servidor corriendo en puerto", PORT);
-});
