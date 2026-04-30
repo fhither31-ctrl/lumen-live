@@ -28,8 +28,13 @@ app.post("/api/ai", async (req, res) => {
     const data = await response.json();
     res.json(data);
   } catch (err) {
-    res.status(500).json({ error: "Error en servidor" });
-  }
+  console.error("ERROR BACKEND:", err);
+
+  res.status(500).json({
+    error: err.message,
+    details: err.response?.data || null
+  });
+}
 });
 const PORT = process.env.PORT || 10000;
 
